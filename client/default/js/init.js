@@ -23,6 +23,7 @@ $(document).ready(function(){
     console.log("start iscroll");
     myScroll = new iScroll('main',{
       bounce: false ,
+      hScroll: false,
       onBeforeScrollStart: function (e) {
             var target = e.target;
             while (target.nodeType != 1) target = target.parentNode;
