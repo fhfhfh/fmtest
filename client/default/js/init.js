@@ -9,6 +9,7 @@ call which will return the remote config.
 $(document).ready(function(){
   // The local config variable from config.js can be accessed directly
   console.log("start js");
+
   var myScroll;
   $("#hidden").click(function(){
     $('#main').css('overflow','hidden');
@@ -20,7 +21,16 @@ $(document).ready(function(){
 
   $("#iscroll").click(function(){
     console.log("start iscroll");
-    myScroll = new iScroll('main',{ bounce: false });
+    myScroll = new iScroll('main',{
+      bounce: false ,
+      onBeforeScrollStart: function (e) {
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+        }
+    });
   });
 
   $("#refresh").click(function(){

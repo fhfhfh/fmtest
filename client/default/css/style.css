@@ -17,7 +17,7 @@ h1 {
 
 #header,#footer {
 	background: green;
-	height: 36px;
+	height: 52px;
 	width: 100%;
 	text-align: center;
 	padding-top: 10px;
@@ -37,21 +37,24 @@ h1 {
 
 #buttons {
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: 0px;
+	left: 0px;
+	width: 100%;
 	z-index: 10;
 }
 
 button {
-	height: 30px;
-	float:	left;
+	height: 40px;
+	margin: 1%;
+	width: 18%;
+	float: left;
 }
 
 #content {
 	position: absolute;
 	width: 100%;
-	top: 46px;
-	bottom: 46px;
+	top: 62px;
+	bottom: 62px;
 	overflow: hidden;
 }
 
