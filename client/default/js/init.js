@@ -10,8 +10,8 @@ $(document).ready(function(){
   // The local config variable from config.js can be accessed directly
   console.log("start js");
 
-  var myScroll;
-  var top;
+
+  var topPosn, scrollDiv, scrollPosn, offset;
   $("#hidden").click(function(){
     $('#main').css('overflow','hidden');
   });
@@ -23,15 +23,63 @@ $(document).ready(function(){
   $("input").click(function(e){
     console.log("scroll",$('#main').scrollTop());
     console.log("position",$(e.target).position());
-    top = e.target.offsetTop-15;
-    // e.target.parentNode.parentNode.scrollTop=e.target.offsetTop-15;
-    $(e.target.parentNode.parentNode).animate({scrollTop: top},600,"linear");
+    topPosn = e.target.offsetTop-15;
+    scrollDiv = $(e.target.parentNode.parentNode);
+    scrollPosn = scrollDiv.scrollTop();
+    offset = topPosn - scrollPosn;
+    // Set the top margin and scroll
+    scrollDiv.css({
+      "margin-top": "0px",
+      "overflow-y": "scroll",
+      "height": scrollDiv.height()+offset
+    });
+    // Add the transition property 
+    scrollDiv.css("transition", "all 0.7s ease");
+    // Apply the scroll effects
+    scrollDiv.css("margin-top", -offset);
+    // Wait until the transition end
+    scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+      // Remove the transition property
+      scrollDiv.css("transition", "none");
+    });
   });
 
   $("input").blur(function(e){
-    $(e.target.parentNode.parentNode).animate({scrollTop: -top},600,"linear");
+    scrollDiv.css("transition", "all 1s ease");
+    // Apply the scroll effects
+    scrollDiv.css("margin-top", 0);
+    // Wait until the transition end
+    scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+      // Remove the transition property
+      scrollDiv.css("transition", "none");
+      scrollDiv.css("height", "");
+    });
   });
 
 
 });
 
+// var easing, e, pos;
+// $(function(){
+//   // Get the click event
+//   $("#go-top").on("click", function(){
+//     // Get the scroll pos
+//     pos= $(window).scrollTop();
+//     // Set the body top margin
+//     $("body").css({
+//       "margin-top": -pos+"px",
+//       "overflow-y": "scroll", // This property is posed for fix the blink of the window width change 
+//     });
+//     // Make the scroll handle on the position 0
+//     $(window).scrollTop(0);
+//     // Add the transition property to the body element
+//     $("body").css("transition", "all 1s ease");
+//     // Apply the scroll effects
+//     $("body").css("margin-top", "0");
+//     // Wait until the transition end
+//     $("body").on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+//       // Remove the transition property
+//       $("body").css("transition", "none");
+//     });
+//   });
+// });
