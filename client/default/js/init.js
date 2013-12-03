@@ -19,29 +19,12 @@ $(document).ready(function(){
     $('#main').css('overflow','auto');
   });
 
-  $("#iscroll").click(function(){
-    console.log("start iscroll");
-    myScroll = new iScroll('main',{
-      bounce: false ,
-      hScroll: false,
-      onBeforeScrollStart: function (e) {
-            var target = e.target;
-            while (target.nodeType != 1) target = target.parentNode;
-
-            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-                e.preventDefault();
-        }
-    });
+  $("input").click(function(e){
+    console.log("scroll",$('#main').scrollTop());
+    console.log("position",$(e.target).position());
+    e.target.scrollIntoView()
   });
 
-  $("#refresh").click(function(){
-    console.log("refresh iscroll");
-    myScroll.refresh();
-  });
-
-  $("#destroy").click(function(){
-    console.log("refresh iscroll");
-    myScroll.destroy();
-  });
 
 });
+
