@@ -22,7 +22,10 @@ $(document).ready(function(){
   $("input").click(function(e){
     console.log("scroll",$('#main').scrollTop());
     console.log("position",$(e.target).position());
-    e.target.scrollIntoView()
+    var top = e.target.offsetTop-15;
+    // e.target.parentNode.parentNode.scrollTop=e.target.offsetTop-15;
+    $(e.target.parentNode.parentNode).animate({scrollTop: top});
+
   });
 
 
