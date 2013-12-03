@@ -12,17 +12,18 @@ $(document).ready(function(){
 
   var listener = function (e) {
     e.preventDefault();
-  }
+  };
 
   document.addEventListener('touchmove', listener, false);
 
   var myScroll;
   $("#hidden").click(function(){
+    document.addEventListener('touchmove', listener, false);
     $('#main').css('overflow','hidden');
   });
 
   $("#auto").click(function(){
-    $('#main').ontouchmove=function(e){return true;}
+    document.removeEventListener('touchmove', listener, false);
     $('#main').css('overflow','auto');
   });
 
