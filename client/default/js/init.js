@@ -10,9 +10,11 @@ $(document).ready(function(){
   // The local config variable from config.js can be accessed directly
   console.log("start js");
 
-  document.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-  }, false);
+  var listener = function (e) {
+    e.preventDefault();
+  }
+
+  document.addEventListener('touchmove', listener, false);
 
   var myScroll;
   $("#hidden").click(function(){
@@ -20,6 +22,7 @@ $(document).ready(function(){
   });
 
   $("#auto").click(function(){
+    $('#main').ontouchmove=function(e){return true;}
     $('#main').css('overflow','auto');
   });
 
