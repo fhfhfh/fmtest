@@ -44,7 +44,7 @@ $(document).ready(function(){
       "overflow-y": "scroll",
       "height": newHeight
     });
-    scrollDiv.css("transition", "all 0.7s ease");
+    scrollDiv.css("transition", "all 0.5s ease");
     scrollDiv.css("margin-top", -offset);
     scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
       scrollDiv.css("transition", "none");
@@ -53,7 +53,7 @@ $(document).ready(function(){
     });
     $("input").blur(function(e){
       console.log("handle blur" + new Date().getTime() + " " + e.target.className);
-      scrollDiv.css("transition", "all 1s ease");
+      scrollDiv.css("transition", "all 0.5s ease");
       scrollDiv.css("margin-top", 0);
       scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
         scrollDiv.css("transition", "none");
