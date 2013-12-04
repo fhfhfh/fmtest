@@ -25,11 +25,21 @@ $(document).ready(function(){
     scrollDiv = $(e.target.parentNode.parentNode);
     scrollPosn = scrollDiv.scrollTop();
     offset = topPosn - scrollPosn;
+    // handle what to do with space below current input when div is scrolled up
     if ((scrollDiv[0].scrollHeight - topPosn) > scrollDiv.height()-15) {
+      //enough space below - increase height to fill all
       newHeight = scrollDiv.height()+offset;
     }
     else {
-      newHeight = "";
+      // content 
+      if (scrollDiv.scrollTop() < (scrollDiv[0].scrollHeight - scrollDiv.height())) {
+        //near bottom and scrolled - increase height by anount scrolled
+        newHeight = scrollDiv[0].scrollHeight - scrollDiv.scrollTop();
+      }
+      else {
+        // scroll is at bottom, no need to increase height
+        newHeight = "";
+      }
     }
     
     scrollDiv.css({
