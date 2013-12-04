@@ -11,7 +11,7 @@ $(document).ready(function(){
   console.log("start js");
 
 
-  var topPosn, scrollDiv, scrollPosn, offset;
+  var topPosn, scrollDiv, scrollPosn, offset, newHeight;
   $("#hidden").click(function(){
     $('#main').css('overflow','hidden');
   });
@@ -27,11 +27,13 @@ $(document).ready(function(){
     scrollDiv = $(e.target.parentNode.parentNode);
     scrollPosn = scrollDiv.scrollTop();
     offset = topPosn - scrollPosn;
+    newHeight = scrollDiv.height()+offset;
+    
     // Set the top margin and scroll
     scrollDiv.css({
       "margin-top": "0px",
       "overflow-y": "scroll",
-      "height": scrollDiv.height()+offset
+      "height": newHeight
     });
     // Add the transition property 
     scrollDiv.css("transition", "all 0.7s ease");
@@ -40,7 +42,9 @@ $(document).ready(function(){
     // Wait until the transition end
     scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
       // Remove the transition property
+      console.log("111");
       scrollDiv.css("transition", "none");
+      scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
     });
   });
 
@@ -51,9 +55,12 @@ $(document).ready(function(){
     // Wait until the transition end
     scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
       // Remove the transition property
+      console.log("222");
       scrollDiv.css("transition", "none");
       scrollDiv.css("height", "");
+      scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
     });
+    
   });
 
 
