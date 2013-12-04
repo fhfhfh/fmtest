@@ -8,21 +8,18 @@ call which will return the remote config.
 
 $(document).ready(function(){
   // The local config variable from config.js can be accessed directly
-  console.log("start js");
-
-
   var topPosn, scrollDiv, scrollPosn, offset, newHeight;
-  $("#hidden").click(function(){
-    $('#main').css('overflow','hidden');
-  });
-
-  $("#auto").click(function(){
-    $('#main').css('overflow','auto');
-  });
 
   $("input").click(function(e){
+    console.log("handle input"+ new Date().getTime()+ " " + e.target.className);
+    scrollDiv = $(e.target.parentNode);
+    //reset to defaoults
+    $("input").off('blur');
+    scrollDiv.css("margin-top", "0px");
+    scrollDiv.css("transition", "none");
+    scrollDiv.css("height", "");
+
     topPosn = e.target.offsetTop-15;
-    scrollDiv = $(e.target.parentNode.parentNode);
     scrollPosn = scrollDiv.scrollTop();
     offset = topPosn - scrollPosn;
     // handle what to do with space below current input when div is scrolled up
@@ -41,7 +38,7 @@ $(document).ready(function(){
         newHeight = "";
       }
     }
-    
+    // set up css tranisition to move content above keyboard
     scrollDiv.css({
       "margin-top": "0px",
       "overflow-y": "scroll",
@@ -51,19 +48,32 @@ $(document).ready(function(){
     scrollDiv.css("margin-top", -offset);
     scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
       scrollDiv.css("transition", "none");
+      // unbind listener so it won't fire on blur
       scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
     });
+    $("input").blur(function(e){
+      console.log("handle blur" + new Date().getTime() + " " + e.target.className);
+      scrollDiv.css("transition", "all 1s ease");
+      scrollDiv.css("margin-top", 0);
+      scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+        scrollDiv.css("transition", "none");
+        scrollDiv.css("height", "");
+        scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
+      });  
+      $("input").off('blur');
+    });
   });
-
-  $("input").blur(function(e){
-    scrollDiv.css("transition", "all 1s ease");
-    scrollDiv.css("margin-top", 0);
-    scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
-      scrollDiv.css("transition", "none");
-      scrollDiv.css("height", "");
-      scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
-    });  
-  });
+  // //put it back when we're finished
+  // $("input").blur(function(e){
+  //   console.log("handle blur" + new Date().getTime()+ " " + e.target.className);
+  //   scrollDiv.css("transition", "all 1s ease");
+  //   scrollDiv.css("margin-top", 0);
+  //   scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+  //     scrollDiv.css("transition", "none");
+  //     scrollDiv.css("height", "");
+  //     scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
+  //   });  
+  // });
   
   // $("form").submit(function(e){
   //     alert("submit");
