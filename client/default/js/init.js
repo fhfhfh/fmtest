@@ -25,7 +25,12 @@ $(document).ready(function(){
     scrollDiv = $(e.target.parentNode.parentNode);
     scrollPosn = scrollDiv.scrollTop();
     offset = topPosn - scrollPosn;
-    newHeight = scrollDiv.height()+offset;
+    if ((scrollDiv[0].scrollHeight - topPosn) > scrollDiv.height()-15) {
+      newHeight = scrollDiv.height()+offset;
+    }
+    else {
+      newHeight = "";
+    }
     
     scrollDiv.css({
       "margin-top": "0px",
