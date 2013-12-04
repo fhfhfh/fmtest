@@ -59,10 +59,12 @@ $(document).ready(function(){
       scrollDiv.css("transition", "none");
       scrollDiv.css("height", "");
       scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
-    });
-    
+    });  
   });
-
+  
+  $("form").submit(function(e){
+      alert("submit");
+    });
 
 });
 
