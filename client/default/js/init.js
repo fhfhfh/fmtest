@@ -24,7 +24,7 @@ $(document).ready(function(){
     console.log("position",$(e.target).position());
     var top = e.target.offsetTop-15;
     // e.target.parentNode.parentNode.scrollTop=e.target.offsetTop-15;
-    $(e.target.parentNode.parentNode).animate({scrollTop: top});
+    $(e.target.parentNode.parentNode).animate({scrollTop: top}, 700);
 
   });
 
