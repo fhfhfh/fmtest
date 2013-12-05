@@ -30,16 +30,16 @@ $(document).ready(function(){
     $(e.target.parentNode).animate({scrollTop: posn}, 700);
 
     //remove the spacer on blur
-    $(this).on("blur",function(e){
-      console.log("handle blur" + new Date().getTime() + " " + e.target.id);
-      console.log("click element "+ currentElementID)
-      setTimeout(function() {
-        if(currentElementID == e.target.id) {
-          console.log("handle blur remove spacer" + new Date().getTime() + " " + e.target.id);
-          $('#scrollSpacer').css({'display':'none', 'height': ''});
-        }
-      },500);
-    });
+    // $(this).on("blur",function(e){
+    //   console.log("handle blur" + new Date().getTime() + " " + e.target.id);
+    //   console.log("click element "+ currentElementID)
+    //   setTimeout(function() {
+    //     if(currentElementID == e.target.id) {
+    //       console.log("handle blur remove spacer" + new Date().getTime() + " " + e.target.id);
+    //       $('#scrollSpacer').css({'display':'none', 'height': ''});
+    //     }
+    //   },500);
+    // });
 
   });
 
