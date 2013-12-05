@@ -11,24 +11,24 @@
 
 </head>
 <body>
-
+<!-- 
 <div id="buttons">
 	<button id="hidden" type="button">overflow hidden</button> 
 	<button id="auto" type="button">overflow auto</button> 
 </div>
-
+ -->
 <div id="header">
 	<h1>HEADER</h1>
 </div>
 
 <div id="content">
 	<div id="main">
-		<div>
+		<!-- <div> -->
 
 		<h3>Some input:</h3>
-		<em id="target1">This is the 1 target.</em> <br/>
-		First name: <br/><input type="text" name="fname" value="bill"><br>
-  		Last name: <br/><input type="text" name="lname" value="bill as well"><br>
+		
+		First name: <br/><input class="input1_" type="text" name="fname" value="bill"><br>
+  		Last name: <br/><input class="input2_" type="text" name="lname" value="bill as well"><br>
 		<p>
 		lsdkfj sldkfj slk jfsdlkfjsdlkf jdslkjf dslkfj sdlfjsd lsdfjlsdk fjlsdk jfs
 		sd fjlsd fjsldkfj lsdjf sdlkfj sdlkjf sdlfkj dslfj sdlfj sdl ksdjhkdfjgh dskh 
@@ -41,10 +41,10 @@
 		   at build time - i.e. the locally included config.js file
 		b) The latest version of the applications configuration can be loaded 
 		   using a cloud action call<br/>
-		<em id="target2">This is the 2 target.</em> 
+		
 	   	</p>
-		Email: <input type="email" name="fname2" value="bill2"><br>
-  		Date: <input type="date" name="lname2" value="bill2 as well"><br>
+		name: <input class="input3_" type="text" name="fname2" value="bill2"><br>
+  		email: <input class="input4_" type="email" name="lname2" value="bill2 as well"><br>
   		<p>
 		To fully appreciate local vs cloud config: build this app and install it on a 
 		device. Once installed, change the contents of the config variable in config.js 
@@ -62,10 +62,9 @@
 		   at build time - i.e. the locally included config.js file
 		b) The latest version of the applications configuration can be loaded 
 		   using a cloud action call</p>
-		<em id="target3">This is the 3 target.</em> 
-	   	<textarea rows="4" cols="50">
-			Text Box
-		</textarea>
+		
+	   	Email: <input class="input5_" type="email" name="fname3" value="bill3"><br>
+  		Date: <input class="input6_" type="date" name="lname3" value="bill3 as well"><br>
 
 		<p>To fully appreciate local vs cloud config: build this app and install it on a 
 		device. Once installed, change the contents of the config variable in config.js 
@@ -82,11 +81,11 @@
 		   at build time - i.e. the locally included config.js file
 		b) The latest version of the applications configuration can be loaded 
 		   using a cloud action <br/>
-	   <em id="target4">This is the 4 target.</em> 
+
 	   </p>
 
-		name: <br/><input type="text" name="fname2" value="bill3"><br>
-  		Date: <br/><input type="date" name="lname2" value="bill2 as well"><br>
+		name: <br/><input class="input7_"  type="text" name="fname4" value="bill4"><br>
+  		Date: <br/><input class="input8_" type="date" name="lname4" value="bill4 as well"><br>
   		<p>
 
 		To fully appreciate local vs cloud config: build this app and install it on a 
@@ -97,8 +96,8 @@
 		just made, while the local config remain static. Using this method, you can keep 
 		your apps updated with new configuration information without the need to publish  
 		a new app to the app store.</p>
-		name: <br/><input type="text" name="fname2" value="bill6"><br>
-	</div>
+		name: <br/><input class="input9_" type="text" name="fname5" value="The bottom"><br>
+		<div id="scrollSpacer"></div>
 	</div>
 </div>
 
