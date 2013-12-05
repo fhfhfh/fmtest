@@ -8,13 +8,14 @@ call which will return the remote config.
 
 $(document).ready(function(){
   // The local config variable from config.js can be accessed directly
-  var topPosn, scrollDiv, scrollPosn, offset, newHeight;
+  var topPosn, scrollDiv, scrollPosn, offset, newHeight, currentElement="";
 
   $("input").click(function(e){
     console.log("handle input"+ new Date().getTime()+ " " + e.target.className);
+    currentElement = e.target.className;
     scrollDiv = $(e.target.parentNode);
     //reset to defaoults
-    $("input").off('blur');
+    // $("input").off('blur');
     scrollDiv.css("margin-top", "0px");
     scrollDiv.css("transition", "none");
     scrollDiv.css("height", "");
@@ -51,16 +52,20 @@ $(document).ready(function(){
       // unbind listener so it won't fire on blur
       scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
     });
-    $("input").blur(function(e){
-      console.log("handle blur" + new Date().getTime() + " " + e.target.className);
-      scrollDiv.css("transition", "all 0.5s ease");
-      scrollDiv.css("margin-top", 0);
-      scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
-        scrollDiv.css("transition", "none");
-        scrollDiv.css("height", "");
-        scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
-      });  
-      $("input").off('blur');
+    $(this).on("blur",function(e){
+      setTimeout(function() {
+        if(currentElement == e.target.className) {
+          console.log("handle blur" + new Date().getTime() + " " + e.target.className);
+          scrollDiv.css("transition", "all 0.5s ease");
+          scrollDiv.css("margin-top", 0);
+          scrollDiv.on("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd", function(){
+            scrollDiv.css("transition", "none");
+            scrollDiv.css("height", "");
+            scrollDiv.off("webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd");
+          });
+        }
+        // $("input").off('blur');
+      },500);
     });
   });
   // //put it back when we're finished
