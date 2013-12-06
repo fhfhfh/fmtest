@@ -32,12 +32,20 @@ $(document).ready(function(){
             console.log("in blur - remove spacer " + new Date().getTime() + " " + e.target.id);
             //check if we need to remove spacer
             if($('#scrollSpacer').css('display') == "block") {
-              // animate page down to allow for removal od spacer
+              var maxScroll = parentDiv[0].scrollHeight - parentDiv.height();
+              var currentScroll = parentDiv[0].scrollTop;
               var height = $('#scrollSpacer').css('height');
-              posn = $(parentDiv).scrollTop() - height.substring(0,height.length-2);
-              $(e.target.parentNode).animate({scrollTop: posn}, 700, function () {
+              if ((maxScroll - currentScroll) > height.substring(0,height.length-2)) {
+                // scrolled enough to just delete it
                 $('#scrollSpacer').css({'display':'none', 'height': ''});
-              });
+              } 
+              else {
+                // animate page down to allow for removal of spacer
+                posn = $(parentDiv).scrollTop() - height.substring(0,height.length-2);
+                $(e.target.parentNode).animate({scrollTop: posn}, 700, function () {
+                  $('#scrollSpacer').css({'display':'none', 'height': ''});
+                });
+              }
             }
           }
         },500);
