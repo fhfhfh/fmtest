@@ -5,13 +5,13 @@ $(document).ready(function(){
   $("input").click(function(e){
     console.log("handle click" + new Date().getTime() + " " + e.target.id);
     currentElement = e.target;
-    currentElementID = e.target.id;
+    currentElementID = e.target.id; // id of current input field
     parentDiv = $(e.target.parentNode);
     // get distance to top of scroll of selected element  
     posn = currentElement.offsetTop - 20 ;
     //get distance to bottom of div
-    // find distance to bottom of scoll of the selected element
-    // check if spacer present and adjust heights if necessary
+    // find distance to bottom of scroll of the selected element
+    // check if spacer already present and adjust heights if necessary
     if($('#scrollSpacer').css('display') == "block") {
       //get spacerheight
       var height = $('#scrollSpacer').css('height');
@@ -19,20 +19,20 @@ $(document).ready(function(){
     }
     distToBottom = parentDiv[0].scrollHeight - posn - spacerHeight;
 
-
-
-    // check if at bottom of screen and spacer needed
+    // check if at bottom of screen and spacer needed plus add blur to remove it later
+    // OR check if there's a scpacer there already and add blur to remove it later
     if ((distToBottom) < parentDiv.height()-20 || spacerHeight > 0 ){
       //add in spacer
-      console.log("add spacer " + (parentDiv.height()-70+'px') );
       $('#scrollSpacer').css({'display':'block', 'height': parentDiv.height()-65+'px'});
       // if spacer is added set up blur to remove it
       $("input").off('blur');
       console.log("add blur " + new Date().getTime() + " " + e.target.id );
       $(this).on("blur",function(e){
         console.log("handle blur "  + e.target.id + " current " + currentElementID) ;
+        // timeout needed to pick up click event if a new field is clicked
         setTimeout(function() {
-
+          // if click on a new input field just scroll, no need to remove spacer
+          // check if its new input field
           if(currentElementID == e.target.id) {
             console.log("in blur - remove spacer " + new Date().getTime() + " " + e.target.id);
             //check if we need to remove spacer
@@ -62,12 +62,3 @@ $(document).ready(function(){
   });
 
 });
-
- 
- //    // find distance to bottom of scoll of the selected element
- //    // check if spacer present and adjust heights if necessary
- //    if($('#scrollSpacer').css('display') == "block") {
- //      //get spacerheight
- //      var height = $('#scrollSpacer').css('height');
- //      spacerHeight = height.substring(0,height.length-2);
- //    }
