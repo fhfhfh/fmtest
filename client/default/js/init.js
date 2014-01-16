@@ -44,11 +44,14 @@ $fh.ready(function() {
         }, function(res) {
             // Cloud call was successful. save this information now
             console.log("back",res)
-        //         
+            document.getElementById('localConfig').innerHTML = 
+                "<p>"  + JSON.stringify(res.status) + "</p>" +
+                "<p>"  + JSON.stringify(res.headers) + "</p>" +
+                "<p>"  + JSON.stringify(res.response) + "</p>" ;       
 
         }, function(msg, err) {
           // An error occured during the cloud call. Alert some debugging information
-          //console.log('Cloud call failed with error:' + msg + '. Error properties:' + JSON.stringify(err));
+          console.log('Cloud call failed with error:' + msg + '. Error properties:' + JSON.stringify(err));
         });
   };
 

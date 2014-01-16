@@ -32,7 +32,7 @@ exports.authenticateUsername = function(params, callback) {
 		console.log("Response received", body);
 		// console.log(response);
 		var user = JSON.parse(body);
-		return callback(null, body);
+		return callback(null, {"status":response.statusCode,"headers":JSON.stringify(response.headers),"response":body});
 	});
 
 };
