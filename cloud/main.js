@@ -1,4 +1,5 @@
-//var util = require('util');
+var util = require('util');
+var request = require('request');
 /* main.js
  * All calls here are publicly exposed as REST API endpoints.
  * - all parameters must be passed in a single JSON paramater.
@@ -9,15 +10,29 @@
  * Trivial example of pulling in a shared config file.
  */
 exports.getConfig = function(params, callback) {
-  $fh.log({message:'crap1'});
   console.log("In getConfig() call");
-  var cfg = require("config.js");
-  return callback(null, {config: "hhhhhhhhhh"});
+  
+
+  // return callback(null, {config: cfg.config});
+  return callback(null, {config: "wtfffff"});
 };
 
-exports.foobar = function(params, callback) {
-  $fh.log({message:'crap2'});
-  return callback(null, {
-    "foo": "bar"
-  });
+exports.authenticateUsername = function(params, callback) {
+
+	console.log("lets go");
+
+	request({
+		url: "http://www.eyequity-app.com/index.php/api/authenticate_username", 
+		headers:{'content-type':'application/x-www-form-urlencoded'},
+		body: 'username=ecrvault&password=comsquar3d',
+		method: "POST"
+	}, function (err, response, body) {
+		console.log("Status", response.statusCode);
+		console.log("Headers", JSON.stringify(response.headers));
+		console.log("Response received", body);
+		// console.log(response);
+		var user = JSON.parse(body);
+		return callback(null, body);
+	});
+
 };

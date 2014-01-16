@@ -6,42 +6,53 @@ loading the local config and binding a click event to invoke the cloud action
 call which will return the remote config.
 */
 
-$(document).ready(function(){
+$fh.ready(function() {
   // The local config variable from config.js can be accessed directly
-  console.log("start js");
+  document.getElementById('localConfig').innerHTML = "<p>" + JSON.stringify(config) + "</p>";
 
-  var myScroll;
-  $("#hidden").click(function(){
-    $('#main').css('overflow','hidden');
-  });
+  // document.getElementById('run_button').onclick = function() {
+  //   // Invoke a cloud action call to get the remote configuration
+  //   // See: http://docs.feedhenry.com/wiki/Actions
+  //   $fh.act(
+  //     {
+  //       act:'getConfig'
+  //     },
+  //     function(res) {
+  //       document.getElementById('cloudConfig').innerHTML = "<p>" + JSON.stringify(res.config) + "</p>";
+  //     },
+  //     function(code,errorprops,params) {
+  //       alert('An error occured: ' + code + ' : ' + errorprops);
+  //     }
+  //   );
+  // };
 
-  $("#auto").click(function(){
-    $('#main').css('overflow','auto');
-  });
 
-  $("#iscroll").click(function(){
-    console.log("start iscroll");
-    myScroll = new iScroll('main',{
-      bounce: false ,
-      hScroll: false,
-      onBeforeScrollStart: function (e) {
-            var target = e.target;
-            while (target.nodeType != 1) target = target.parentNode;
+  document.getElementById('run_button').onclick = function() {
+    // Invoke a cloud action call to get the remote configuration
+    // See: http://docs.feedhenry.com/wiki/Actions
+    $fh.act({
+          "act": "authenticateUsername",
+          "req": {
+            "clientID": "SightRisk",
+            "uuid": "86ac269232056154bcb8c76e030a49d4",
+            "deviceName": "iPhone",
+            "appName": "EyeQuity",
+            "appVersion": ".1",
+            "osVersion": "6.0"
+          },
+          "timeout": 25000
+        }, function(res) {
+            // Cloud call was successful. save this information now
+            console.log("back",res)
+        //         
 
-            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-                e.preventDefault();
-        }
-    });
-  });
+        }, function(msg, err) {
+          // An error occured during the cloud call. Alert some debugging information
+          //console.log('Cloud call failed with error:' + msg + '. Error properties:' + JSON.stringify(err));
+        });
+  };
 
-  $("#refresh").click(function(){
-    console.log("refresh iscroll");
-    myScroll.refresh();
-  });
 
-  $("#destroy").click(function(){
-    console.log("refresh iscroll");
-    myScroll.destroy();
-  });
+
 
 });
